@@ -1,10 +1,31 @@
 class CLI
   def run
+    User.seed
     system('clear')
     greeting
+    login
     while menu != 'exit'
     end
     end_program
+  end
+
+  def login
+    authenticated = false
+
+    while authenticated != true
+      puts "Please login: "
+      puts "> What is your username?"
+      username = gets.chomp
+      puts "> What is your password?"
+      password = gets.chomp
+
+      if Auth.authenticate_user(User.all, username, password)
+        puts "Login successful!"
+        authenticated = true
+      else
+        puts "Login attempt failed."
+      end
+    end
   end
 
   def greeting
